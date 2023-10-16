@@ -3,6 +3,31 @@ import pandas as pd
 test_loc = 231
 
 
+def set_filepath(stage):
+    file_paths = {
+        'train': 'data/Training_DataSet.csv',
+        'test': 'data/Test_Dataset.csv'
+    }
+
+    common_transform_path = 'data/final/'
+
+    if stage.lower() == 'train':
+        # Transformation for the training stage
+        transform_suffix = 'train_'
+    else:
+        # Transformation for the testing stage
+        transform_suffix = 'test_'
+
+    eda_dataset = file_paths[stage.lower()]
+    data_transform_ds = file_paths[stage.lower()]
+    transform_categorical_clean = f'{common_transform_path}{transform_suffix}categorical_clean.csv'
+    transform_numerical_clean = f'{common_transform_path}{transform_suffix}numerical_clean.csv'
+    transform_final = f'{common_transform_path}{transform_suffix}final_clean.csv'
+
+    return eda_dataset, data_transform_ds, transform_categorical_clean, transform_numerical_clean, transform_final
+
+
+
 def percent_missing(in_df):
     result = 100 * in_df.isnull().sum() / len(in_df)
     result = result[result > 0].sort_values()
