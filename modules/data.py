@@ -1,4 +1,5 @@
 import pandas as pd
+import ast
 
 test_loc = 231
 
@@ -151,3 +152,10 @@ def bucket_listing_sources(source_count):
         return "Other Sources"
     else:
         return "Medium-Frequency Sources"
+
+# Function to safely parse the string representation of lists
+def parse_features(value):
+    try:
+        return ast.literal_eval(value)
+    except (ValueError, SyntaxError, TypeError):
+        return []
